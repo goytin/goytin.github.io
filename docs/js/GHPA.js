@@ -1102,7 +1102,7 @@ let ghpaRepo = 'ghpa-test';
 let ghpaBranch = 'main';
 
 let ghpaDefaultHTMLfile = 'index.html';
-let ghpaLoginFormFile ='/examples/loginform.html';
+let ghpaLoginFormFile ='/loginform.html';
 
 /* Don't change this; it should always be empty in the global configuration.
  * It can be overridden by setting the variable on a specific public stub
