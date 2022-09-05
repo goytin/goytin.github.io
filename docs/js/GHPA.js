@@ -1111,7 +1111,7 @@ let ghpaFilename = '';
 
 let ghpaUserID = sessionStorage.getItem('ghpaUserID');
 
-const ghpaTokensOnlyFlag = true;
+const ghpaTokensOnlyFlag = false;
 let ghpaSSOFlag = true;
 let ghpaAuthOnlyFlag = false;
 let ghpaOnlyGetBodyFlag = false;
