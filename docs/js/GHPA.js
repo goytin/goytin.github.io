@@ -524,7 +524,10 @@ async function ghpaRetrieve(retrievedCredsFlag, creds, credsKey) {
          * the variable for the argument passed to this function; because we
          * might want to reference this specific login form later in this
          * function. */
-        GitHubToken = btoa(`${login}:` + creds.querySelector('#ghpaPassword').value);
+        //GitHubToken = btoa(`${login}:` + creds.querySelector('#ghpaPassword').value);
+	
+	// TODO: Add explnation.
+	GitHubToken = creds.querySelector('#ghpaPassword').value;
     }
 
     /* At this point we should have the login and GitHubToken.  Validate that
@@ -561,7 +564,7 @@ async function ghpaRetrieve(retrievedCredsFlag, creds, credsKey) {
     /* If ghpaTokensOnlyFlag is enabled, require passwords that match the
      * format of a GitHub personal access token string: 40 hexadecimal
      * characters. */
-    } else if (ghpaTokensOnlyFlag && ! atob(GitHubToken).slice(tokenDelimiterPosition + 1).match(/^[a-f0-9]{40}$/i)) {
+    } else if (0 /*ghpaTokensOnlyFlag && ! atob(GitHubToken).slice(tokenDelimiterPosition + 1).match(/^[a-f0-9]{40}$/i)*/) {
 
         /* Display an error message on the web page. */
         ghpaAuthMessage("Use of GitHub personal access tokens is required for authentication, and the passcode entered doesn't appear to be a token string.");
@@ -664,6 +667,11 @@ async function ghpaRetrieve(retrievedCredsFlag, creds, credsKey) {
          * that our code below doesn't include the trailing '/' character.
          * That's because at this point ghpaFilename is guaranteed to have a
          * leading '/' character - so it's all good. */
+
+	/* GitHub uses Authorization: Bearer
+	 * see https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api#using-query-parameters
+	 * Vladik, 2022.09.06
+	 */
         const request = new Request(
             `https://api.github.com/repos/${ghpaOrg}/${ghpaRepo}/contents${ghpaFilename}?ref=${ghpaBranch}`,
             {
@@ -671,7 +679,7 @@ async function ghpaRetrieve(retrievedCredsFlag, creds, credsKey) {
                 credentials: 'omit',
                 headers: {
                     Accept: 'application/json',
-                    Authorization: `Basic ${GitHubToken}`
+                    Authorization: `Bearer ${GitHubToken}`
                 },
             }
         );
@@ -1111,7 +1119,7 @@ let ghpaFilename = '';
 
 let ghpaUserID = sessionStorage.getItem('ghpaUserID');
 
-const ghpaTokensOnlyFlag = false;
+const ghpaTokensOnlyFlag = true;
 let ghpaSSOFlag = true;
 let ghpaAuthOnlyFlag = false;
 let ghpaOnlyGetBodyFlag = false;
