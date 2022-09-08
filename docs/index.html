@@ -17,29 +17,6 @@
             GHPA requires client-side JavaScript to be enabled. Please enable JavaScript and reload the page.
         <p></noscript>
 
-        <!-- In each stub file, we can have an element with an id of
-             'ghpaPrompt'.  Optionally, set a style property of
-             'display: none' to minimize rendering of the element.  The code
-             in ghpaLoadPage.js attempts - if SSO is enabled - to load content
-             from the private repository.  If that fails, then the ghpaPrompt
-             element is made visible. -->
-        <div id="ghpaPrompt" style="display: none;">
-            <h1>Public stub file, corresponding private file</h1>
-            <p>The stub file 'file1_exists.html' exists in the public repository and a corresponding private file exists in the private repository.</p>
-            <ul>
-                <li>If you haven't already authenticated to the private GitHub repository, then this page will briefly display a 'Loading content...' message that is automatically replaced by this introductory content and a login form.</li>
-                <li>If you use the form and <b>unsuccessfully</b> authenticate to the private GitHub repository, then this page will still display the introductory content and login form but will also display a message identifying the type of authentication failure.</li>
-                    <li>If you use the form and <b>successfully</b> authenticate to the private GitHub repository:
-                    <ul>
-                        <li> this page will be replaced by the contents of the 'file1_exists.html' file from the private repository;</li>
-                        <li> your authentication credentials will be stored in memory for future use; and</li>
-                        <li> if you refresh this page or access other pages that use the stored authentication credentials, then the page will briefly display the 'Loading content...' message and attempt to use the stored credentials to access the private GitHub repository.</li>
-                    </ul>
-                </li>
-            </ul>
-            <hr>
-        </div>
-
         <!-- In each stub file, we need an element with an id of
              'ghpaLoginForm'.  This containts the initial 'Loading content...'
              text.  The code in ghpaLoadPage.js attempts - if SSO is enabled -
