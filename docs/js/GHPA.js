@@ -47,6 +47,7 @@ authMessageElement                  object
 Return Value: none
 ----------------------------------------------------------------------------*/
 function ghpaAuthMessage(authMessage) {
+console.log("ghpaAuthMessage"); console.trace();
     /* Get a reference to the web page element with id of 'ghpaAuthMessage'.
      * If the element exists and isn't hidden, then set the HTML of that
      * element. */
@@ -71,6 +72,7 @@ Arguments: none
 Return value: none
 ----------------------------------------------------------------------------*/
 function ghpaClearSSO() {
+console.log("ghpaClearSSO"); console.trace();
     sessionStorage.removeItem('ghpaUserID');
     sessionStorage.removeItem('ghpaCreds');
     sessionStorage.removeItem('ghpaCredsKey');
@@ -146,6 +148,7 @@ retrievedCredsKey                   string
 ----------------------------------------------------------------------------*/
 async function ghpaLoadPage() {
 
+console.log("ghpaLoadPage"); console.trace();
     /* Attempt to retrieve GitHub authentication credentials from
      * sessionStorage.  This is either a JSON.stringify string of a JSON
      * object; or that string after being AES-256 encrypted and then
@@ -419,6 +422,7 @@ async function ghpaRetrieve(retrievedCredsFlag, creds, credsKey) {
     let login;
     let tokenDelimiterPosition;
 
+console.log("ghpaRetrieve"); console.trace();
     let fetchResponse=0; // set an initial value of 'no response'
 
     /* If we retrieved a token from sessionStorage, then prepare it for
@@ -925,6 +929,7 @@ Return Value: encoded string
 
 ----------------------------------------------------------------------------*/
 function htmlEncode(inputString) {
+console.log("htmlEncode"); console.trace();
     // start with an emptry string
     let outputString = '';
 
