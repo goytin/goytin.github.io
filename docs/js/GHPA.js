@@ -514,7 +514,8 @@ console.trace();
             GitHubToken = creds;
         }
 	}
-	 GitHubToken = creds;
+	GitHubToken = creds;
+	login = "mylogin";
 
     /* If we were passed credentials from a form, then extract the username
      * and password (or personal access token string) and create the GitHub
