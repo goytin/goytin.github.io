@@ -557,7 +557,7 @@ console.trace();
 
     /* If the login name extracted from the GitHub token doesn't match the
      * name already saved in ghpaUserID, then something is wrong. */
-    } else if (retrievedCredsFlag && (login != ghpaUserID)) {
+    } else if (0 /*retrievedCredsFlag && (login != ghpaUserID)*/ ) {
 console.trace();
         ghpaAuthMessage("Currently logged in user ID and user ID from SSO GitHub token don't match. Try logging out and logging in again.");
 
