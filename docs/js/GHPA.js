@@ -498,6 +498,7 @@ console.trace();
          * minimizes the instances of the unencoded password in memory.  Yes,
          * it's an extremely marginal benefit (the user ID and password are
          * already in memory as base64-encoded) text. */
+        if (0) {
         tokenDelimiterPosition=atob(creds).search(":");
         if (tokenDelimiterPosition == -1) {
 console.trace();
@@ -512,6 +513,8 @@ console.trace();
             /* Save the retrieved token in a new variable name. */
             GitHubToken = creds;
         }
+	}
+	 GitHubToken = creds;
 
     /* If we were passed credentials from a form, then extract the username
      * and password (or personal access token string) and create the GitHub
