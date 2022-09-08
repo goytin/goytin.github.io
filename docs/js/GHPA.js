@@ -163,6 +163,7 @@ console.log("ghpaLoadPage"); console.trace();
      * use, then attempt to retrieve content from the private GitHub
      * repository. */
     if (!(ghpaSSOFlag && retrievedCreds && ghpaRetrieve(true, retrievedCreds, retrievedCredsKey))) {
+console.trace();
         /* If any of:
          *  - SSO isn't enabled;
          *
@@ -183,6 +184,7 @@ console.log("ghpaLoadPage"); console.trace();
         /* If ghpaLoginFormFile is set to '-', then don't replace the element
          * ghpaLoginForm. */
         if (ghpaLoginFormFile != '-') {
+console.trace();
             /* Retrieve the login form. */
             await fetch(ghpaLoginFormFile)
 
@@ -428,11 +430,13 @@ console.log("ghpaRetrieve"); console.trace();
     /* If we retrieved a token from sessionStorage, then prepare it for
      * use in authenticating to GitHub. */
     if (retrievedCredsFlag && creds) {
+console.trace();
         
         /* If we retrieved a string representation of the AES-256 key and IV
          * from sessionStorage then convert them to a usable key and IV and
          * decrypt the GitHub token. */
         if (credsKey) {
+console.trace();
 
             /* Create a new Uint8Array to hold the AES-256 binary data. */
             let AESkeyBuffer = new Uint8Array(32);
@@ -496,11 +500,13 @@ console.log("ghpaRetrieve"); console.trace();
          * already in memory as base64-encoded) text. */
         tokenDelimiterPosition=atob(creds).search(":");
         if (tokenDelimiterPosition == -1) {
+console.trace();
             /* A GitHub token is supposed to be 'user:password'.  If we don't
              * have a ':' character then something isn't right. */
             GitHubToken = '';
             login = '';
         } else {
+console.trace();
             login = atob(creds).slice(0, tokenDelimiterPosition);
 
             /* Save the retrieved token in a new variable name. */
@@ -511,6 +517,7 @@ console.log("ghpaRetrieve"); console.trace();
      * and password (or personal access token string) and create the GitHub
      * token. */
     } else {
+console.trace();
         /* Save the login name for error messages.
          *
          * Don't save the password anywhere except in the base64-encoded
@@ -541,11 +548,13 @@ console.log("ghpaRetrieve"); console.trace();
     /* If we were passed retrieved credentials but weren't able to extract
      * a login name, then something is wrong. */
     if (retrievedCredsFlag && (! login)) {
+console.trace();
         ghpaAuthMessage("SSO GitHub token couldn't be parsed. Try logging out and logging in again.");
 
     /* If the login name extracted from the GitHub token doesn't match the
      * name already saved in ghpaUserID, then something is wrong. */
     } else if (retrievedCredsFlag && (login != ghpaUserID)) {
+console.trace();
         ghpaAuthMessage("Currently logged in user ID and user ID from SSO GitHub token don't match. Try logging out and logging in again.");
 
     /* According to github.com/join, GitHub usernames:
@@ -558,6 +567,7 @@ console.log("ghpaRetrieve"); console.trace();
      * 'required' but users are crazy.  This will also serve as a (minor)
      * check against a problem with data retrieved from sessionStorage. */
     } else if (! login.match(/^[a-z\d](?:[a-z\d]|-(?=[a-z\d]))+$/i)) {
+console.trace();
 
         /* Don't display the bogus user name as part of an error message.  Part
          * of the point of this filter is to prevent XSS by only allowing valid
@@ -569,11 +579,13 @@ console.log("ghpaRetrieve"); console.trace();
      * format of a GitHub personal access token string: 40 hexadecimal
      * characters. */
     } else if (0 /*ghpaTokensOnlyFlag && ! atob(GitHubToken).slice(tokenDelimiterPosition + 1).match(/^[a-f0-9]{40}$/i)*/) {
+console.trace();
 
         /* Display an error message on the web page. */
         ghpaAuthMessage("Use of GitHub personal access tokens is required for authentication, and the passcode entered doesn't appear to be a token string.");
 
     } else {
+console.trace();
 
         /* The ghpaFilename variable is initially defined in the JavaScript
          * header, and set to an emptry string.  The calling page can
@@ -586,12 +598,14 @@ console.log("ghpaRetrieve"); console.trace();
          * path but may specify a directory name instead of a specific
          * file. */
         if (! ghpaFilename) {
+console.trace();
             ghpaFilename = window.location.pathname;
 
         /* If the filename isn't set to an empty string but isn't an absolute
          * path (i.e., it doesn't start with a '/' character), then combine it
          * with window.location.pathname. */
         } else if (ghpaFilename.slice(0, 1) != '/') {
+console.trace();
             /* Prepend the filename with the directory portion of
              * window.location.pathname.  For example, if 
              * window.location.pathname is '/dir/subdir/file1' and the existing
@@ -612,6 +626,7 @@ console.log("ghpaRetrieve"); console.trace();
          * the ghpaDefaultHTMLfile variable (usually via the ghpaConfig.js
          * file).  */
         if (ghpaFilename.slice(ghpaFilename.length - 1) == '/') {
+console.trace();
             ghpaFilename = ghpaFilename + ghpaDefaultHTMLfile;
         }
 
@@ -699,6 +714,7 @@ console.log("ghpaRetrieve"); console.trace();
              * for use when another web page (during this session) attempts to
              * retrieve and reuse the GitHub credentails. */             
             if (ghpaSSOFlag && (response.status == 200 || response.status == 404)) {
+console.trace();
 
                 /* The actions required to store the token for later use:
                  *
@@ -784,6 +800,7 @@ console.log("ghpaRetrieve"); console.trace();
                     if (sessionStorage.getItem('ghpaCreds')    != GitHubToken ||
                         sessionStorage.getItem('ghpaCredsKey') != credsKey ||
                         sessionStorage.getItem('ghpaUserID')   != login) {
+console.trace();
                         
                         sessionStorage.removeItem('ghpaCreds');
                         sessionStorage.removeItem('ghpaCredsKey');
@@ -811,6 +828,7 @@ console.log("ghpaRetrieve"); console.trace();
              * to display after a successful login, then just retrieve that
              * without setting ghpaAuthOnlyFlag. */
             if (ghpaAuthOnlyFlag && (response.status == 200 || response.status == 404)) {
+console.trace();
                 /* Display the 'success' message. */
                  ghpaAuthMessage(`Confirmed GitHub authentication as ${login}.` + (ghpaSSOFlag ? " Credentials saved for SSO." : ""));
 
@@ -823,6 +841,7 @@ console.log("ghpaRetrieve"); console.trace();
              * performing an authentication-only check, then display the
              * retrieved content. */
             } else if (response.status == 200 && ! ghpaAuthOnlyFlag) {        
+console.trace();
                 response.json().then(function (json) {
                     /* Retrieve the content. */
                     const contentRetrieved = json.encoding === 'base64' ? atob(json.content) : json.content;
@@ -830,6 +849,7 @@ console.log("ghpaRetrieve"); console.trace();
                     /* Render just the content inside <body></body> tags from
                      * the retrieved content? */
                     if (ghpaOnlyGetBodyFlag) {
+console.trace();
 
                         /* Find the first instance of '<body'.  Not looking
                          * for '<body>' because we have to allow for the
@@ -849,16 +869,19 @@ console.log("ghpaRetrieve"); console.trace();
                          * didn't find the markers.  Replace webpage content
                          * with a null string. */
                         if (startIndex == -1 || endIndex == -1) {
+console.trace();
                             document.body.innerHTML = '';
 
                         /* If we found the markers, then render the marked
                          * content. */
                         } else {
+console.trace();
                             document.body.innerHTML = contentRetrieved.slice(startRetrievalIndex, endIndex);
                         }
 
                     /* Render all the retrieved content? */
                     } else {
+console.trace();
                         document.body.innerHTML = contentRetrieved;
                     }
                 });
@@ -866,11 +889,13 @@ console.log("ghpaRetrieve"); console.trace();
             /* If we didn't successfully retrieve the content, then display an
              * appropriate error message. */
             } else if (response.status != 200) {
+console.trace();
                 
                 /* If this is an authentication-only check and the response code
                  * was *not* 404 (file not found), then display an error message
                  * specific to 'authentication failed. */
                 if (ghpaAuthOnlyFlag && response.status != 404) {
+console.trace();
                     ghpaAuthMessage(`Failed to authenticate to ${ghpaOrg} : ${ghpaRepo} : ${ghpaBranch} as ${login} (status: ${response.status}).`);
 
                 /* If this was an attempt to actually retrieve content (i.e., not
@@ -881,6 +906,7 @@ console.log("ghpaRetrieve"); console.trace();
                  * desired; either inside this 'else' or through a series of
                  * additional 'else if' statements. */
                 } else {
+console.trace();
                     ghpaAuthMessage(`Failed to load ${ghpaOrg} : ${ghpaRepo} : ${ghpaBranch} : ${ghpaFilename} as ${login} (status: ${response.status}).`);
                 }
             }
