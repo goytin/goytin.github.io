@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/localstyle.css">
+
+        <!-- Load the GHPA functions and initial configuration. -->
+        <script src="/js/GHPA.js"></script>
+        <script>ghpaFilename='/DCB-GPT-v1.0.json'</script>
+    </head>
+
+    <!-- After the <body> is done loading: If desired and possible, then load
+         content from the private GitHub repository; otherwise display the
+         login form and (if an attempt to load content was made) status
+         message. -->
+    <body onload="ghpaLoadPage()">
+        <!-- content to be displayed if JavaScript isn't enabled -->
+        <noscript><p>
+            GHPA requires client-side JavaScript to be enabled. Please enable JavaScript and reload the page.
+        <p></noscript>
+
+	<div id="ghpaPrompt" style="display: none;">
+	</div>
+
+        <!-- In each stub file, we need an element with an id of
+             'ghpaLoginForm'.  This containts the initial 'Loading content...'
+             text.  The code in ghpaLoadPage.js attempts - if SSO is enabled -
+             to load content from the private repository.  if that succeeds,
+             then the ghpaLoginForm element is replaced with the content
+             loaded from the private GitHub repository. -->
+        <div id="ghpaLoginForm">
+            <p>Loading content...</p>
+        </div>
+
+        <!-- In each stub file, we can have an element with an id of
+             'ghpaAuthMessage'.  If the gphaRetrieve() function fails to
+             authenticate to or load content from the private GitHub
+             repository, then the contents of the ghpaAuthMessage element are
+             replaced with a status message. -->
+        <div id="ghpaAuthMessage" style="font-style: italic;"></div>
+    </body>
+</html>
