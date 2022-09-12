@@ -901,7 +901,7 @@ console.trace();
                  * specific to 'authentication failed. */
                 if (ghpaAuthOnlyFlag && response.status != 404) {
 console.trace();
-                    ghpaAuthMessage(`Failed to authenticate to ${ghpaOrg} : ${ghpaRepo} : ${ghpaBranch} as ${login} (status: ${response.status}).`);
+                    ghpaAuthMessage(`Failed to authenticate to ${ghpaOrg} : ${ghpaRepo} : ${ghpaBranch} (status: ${response.status}).`);
 
                 /* If this was an attempt to actually retrieve content (i.e., not
                  * an authentication-only check), then display a generic error
@@ -912,7 +912,7 @@ console.trace();
                  * additional 'else if' statements. */
                 } else {
 console.trace();
-                    ghpaAuthMessage(`Failed to load ${ghpaOrg} : ${ghpaRepo} : ${ghpaBranch} : ${ghpaFilename} as ${login} (status: ${response.status}).`);
+                    ghpaAuthMessage(`Failed to load ${ghpaOrg} : ${ghpaRepo} : ${ghpaBranch} : ${ghpaFilename} (status: ${response.status}).`);
                 }
             }
 
