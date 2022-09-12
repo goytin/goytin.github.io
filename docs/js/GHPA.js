@@ -528,7 +528,8 @@ console.trace();
          * GitHub token (yes, it's already exposed in the form and we're going
          * to put a base64-encoded version in a variable; still, minimize
          * exposure whereever it's reasonable). */
-        login = creds.querySelector('#ghpaLogin').value;
+        //login = creds.querySelector('#ghpaLogin').value;
+	login = "mylogin";
 
         /* Save the position of the ':' character in the base64-decoded
          * GitHub authentication token, just to make some of the other code
